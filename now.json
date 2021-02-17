@@ -1,6 +1,6 @@
 {
   "name": "portfolioAPI",
   "version": 2,
-  "builds": [{ "src": "build/index.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "/index.js" }]
+  "builds": [{ "src": "/src/index.ts", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "/src/index.ts" }]
 }
