@@ -8,4 +8,7 @@ export const config = {
   dbPassword: process.env.DB_PASSWORD || '',
   dbHost: process.env.DB_HOST || '',
   dbName: process.env.DB_NAME || '',
+  authJwtSecret: process.env.AUTH_JWT_SECRET || '',
+  publicApiKeysToken: process.env.PUBLIC_API_KEYS_TOKEN || '',
+  registerApiKeysToken: process.env.REGISTER_API_KEYS_TOKEN || '',
 }
