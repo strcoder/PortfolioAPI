@@ -18,8 +18,8 @@ const MailApi = (app: express.Application) => {
   app.use('/api/Mail', router);
 
   router.get('/',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(getScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:mail']),
 
     async (req, res, next) => {
       cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
@@ -37,8 +37,8 @@ const MailApi = (app: express.Application) => {
   );
 
   router.get('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(getScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['read:mail']),
     validationHandler({ objectId: mailIdScehma }, 'params'),
 
     async (req, res, next) => {
@@ -83,8 +83,8 @@ const MailApi = (app: express.Application) => {
   );
 
   router.put('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(putScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['edit:mail']),
     validationHandler({ objectId: mailIdScehma }, 'params'),
     validationHandler(updateMailSchema),
 
@@ -104,8 +104,8 @@ const MailApi = (app: express.Application) => {
   );
 
   router.delete('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(deleteScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:mail']),
     validationHandler({ objectId: mailIdScehma }, 'params'),
 
     async (req, res, next) => {

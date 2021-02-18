@@ -64,8 +64,8 @@ const SocialMediaApi = (app: express.Application) => {
   );
 
   router.post('/',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(postScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['create:social-media']),
     validationHandler(createSocialMediaSchema) ,
 
     async (req, res, next) => {
@@ -83,8 +83,8 @@ const SocialMediaApi = (app: express.Application) => {
   );
 
   router.put('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(putScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['update:social-media']),
     validationHandler({ objectId: socialMediaIdScehma }, 'params'),
     validationHandler(updateSocialMediaSchema),
 
@@ -104,8 +104,8 @@ const SocialMediaApi = (app: express.Application) => {
   );
 
   router.delete('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(deleteScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:social-media']),
     validationHandler({ objectId: socialMediaIdScehma }, 'params'),
 
     async (req, res, next) => {

@@ -19,7 +19,7 @@ const ProjectApi = (app: express.Application) => {
 
   router.get('/',
     // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(getScope),
+    // scopesValidationHandler(['get:project']),
 
     async (req, res, next) => {
       cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
@@ -64,8 +64,8 @@ const ProjectApi = (app: express.Application) => {
   );
 
   router.post('/',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(postScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['create:project']),
     validationHandler(createProjectSchema) ,
 
     async (req, res, next) => {
@@ -83,8 +83,8 @@ const ProjectApi = (app: express.Application) => {
   );
 
   router.put('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(putScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['update:project']),
     validationHandler({ objectId: projectIdScehma }, 'params'),
     validationHandler(updateProjectSchema),
 
@@ -104,8 +104,8 @@ const ProjectApi = (app: express.Application) => {
   );
 
   router.delete('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(deleteScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:project']),
     validationHandler({ objectId: projectIdScehma }, 'params'),
 
     async (req, res, next) => {

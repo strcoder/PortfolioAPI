@@ -18,8 +18,8 @@ const MessageApi = (app: express.Application) => {
   app.use('/api/message', router);
 
   router.get('/',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(getScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['get:messages']),
 
     async (req, res, next) => {
       cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
@@ -37,8 +37,8 @@ const MessageApi = (app: express.Application) => {
   );
 
   router.get('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(getScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['get:message']),
     validationHandler({ objectId: messageIdScehma }, 'params'),
 
     async (req, res, next) => {
@@ -65,7 +65,7 @@ const MessageApi = (app: express.Application) => {
 
   router.post('/',
     // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(postScope),
+    // scopesValidationHandler(['get:message']),
     validationHandler(createMessageSchema) ,
 
     async (req, res, next) => {
@@ -83,8 +83,8 @@ const MessageApi = (app: express.Application) => {
   );
 
   router.put('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(putScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['update:message']),
     validationHandler({ objectId: messageIdScehma }, 'params'),
     validationHandler(updateMessageSchema),
 
@@ -104,8 +104,8 @@ const MessageApi = (app: express.Application) => {
   );
 
   router.delete('/:objectId',
-    // passport.authenticate('jwt', { session: false }),
-    // scopesValidationHandler(deleteScope),
+    passport.authenticate('jwt', { session: false }),
+    scopesValidationHandler(['delete:message']),
     validationHandler({ objectId: messageIdScehma }, 'params'),
 
     async (req, res, next) => {
